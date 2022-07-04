@@ -6,6 +6,7 @@ import { UsersModule } from './users/users.module';
 import { Users } from './users/user.entity';
 import { Student } from './student/student.entity';
 import { teacher } from './teacher/teacher.entity';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -21,7 +22,8 @@ import { teacher } from './teacher/teacher.entity';
   } ),
   StudentModule,
   UsersModule,
-  TeacherModule
+  TeacherModule,
+  AuthModule
 ],
 })
 export class AppModule {}

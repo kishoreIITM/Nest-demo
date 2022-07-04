@@ -12,14 +12,18 @@ export class UsersService {
      public studentService :StudentService,
      public teacherService: TeacherService){}
     
-    async get(){
+    async getall(){
         let data= await this.userRepo.find()
         return data
     }
 
-    
 
-    async signup(data:any){
+    async findOne(email:string){
+       let data = await this.userRepo.findOneBy( {email:email})
+        return data
+    }
+
+    async create(data:any){
         let newUser = this.userRepo.create(data)
         await this.userRepo.insert(newUser)
         .then((reply)=>{
