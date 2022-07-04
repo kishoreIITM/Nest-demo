@@ -1,24 +1,18 @@
 import { Controller,Get,Post,Put,Delete } from '@nestjs/common';
+import { TeacherService } from './teacher.service';
 
 @Controller('teacher')
 export class TeacherController {
-    @Get()
-    get(){
 
-    }
+    constructor(public teacherService : TeacherService){}
 
-    @Post()
-    post(){
+//     @Get()
+//     get(){
+//         return this.teacherService.findAll()
+//     }
 
-    }
-
-    @Put()
-    put(){
-
-    }
-
-    @Delete()
-    delete(){
-
-    }
+//     @Post()
+//     post(@Body() data:any){
+//         return this.teacherService.write(data)
+//     }
 }
