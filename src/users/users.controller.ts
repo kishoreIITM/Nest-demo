@@ -1,15 +1,16 @@
-import { Controller,UseGuards , Get,Post, Body,Request} from '@nestjs/common';
+import { Controller,UseGuards,Inject , Get,Post, Body,Request, forwardRef} from '@nestjs/common';
 import { UsersService } from './users.service';
 import { AuthGuard } from '@nestjs/passport';
+import { AuthService } from 'src/auth/auth.service';
 
 @Controller('users')
 export class UsersController {
 
-    constructor(public usersService:UsersService){
+    constructor( public usersService:UsersService, @Inject(forwardRef(()=>AuthService)) public authService:AuthService){
 
     }
 
-
+    @UseGuards(AuthGuard('jwt'))
     @Get()
     getAll(){    
         return this.usersService.getall()
@@ -18,7 +19,7 @@ export class UsersController {
     @UseGuards(AuthGuard('local'))
     @Post('/login')
     login(@Request() req){
-        return req.user
+        return this.authService.jwt(req.user) 
     }
 
 
